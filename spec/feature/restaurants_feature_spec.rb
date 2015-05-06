@@ -1,6 +1,14 @@
 require 'rails_helper'
+require 'helpers/users'
+
+include UserSpecHelpers
 
 feature 'restaurants' do
+
+  before :each do
+    sign_up_and_sign_in
+  end
+
   context 'no restaurants have been added' do
     scenario 'should display a prompt to add a restaurant' do
       visit '/restaurants'
