@@ -1,10 +1,17 @@
 require 'rails_helper'
 require 'helpers/reviews'
+require 'helpers/users'
+require 'helpers/restaurants'
 
 include ReviewSpecHelpers
+include UserSpecHelpers
+include RestaurantSpecHelpers
 
 feature 'reviewing' do
-  before {Restaurant.create name: 'KFC'}
+  before do
+    sign_up_and_sign_in
+    create_a_restaurant
+  end
 
   scenario 'allows users to leave a review using a form' do
     write_review('KFC')
