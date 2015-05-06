@@ -1,4 +1,5 @@
 class RestaurantsController < ApplicationController
+
   before_action :authenticate_user!, :except => [:index, :show]
 
   def index
@@ -23,6 +24,7 @@ class RestaurantsController < ApplicationController
   end
   def edit
     @restaurant = Restaurant.find(params[:id])
+    verify_creator(@restaurant)
   end
   def update
     @restaurant = Restaurant.find(params[:id])
@@ -34,5 +36,14 @@ class RestaurantsController < ApplicationController
     @restaurant.destroy
     flash[:notice] = 'Restaurant deleted successfully'
     redirect_to '/restaurants'
+  end
+  def verify_creator(restaurant)
+    unless created_by_current_user(restaurant)
+      flash[:notice] = "NO"
+      redirect_to '/'
+    end
+  end
+  def created_by_current_user(restaurant)
+    restaurant.user_id == current_user.id
   end
 end

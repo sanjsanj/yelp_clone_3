@@ -1,12 +1,18 @@
 require 'rails_helper'
 require 'helpers/users'
+require 'helpers/restaurants'
 
 include UserSpecHelpers
+include RestaurantSpecHelpers
 
 feature 'restaurants' do
 
   before :each do
     sign_up_and_sign_in
+  end
+
+  after :each do
+    sign_out
   end
 
   context 'no restaurants have been added' do
@@ -66,11 +72,14 @@ feature 'restaurants' do
 
   context 'editing restaurants' do
 
-    before {Restaurant.create name: 'KFC'}
+    before do
+      create_a_restaurant
+    end
 
     scenario 'let a user edit a restaurant' do
       visit '/restaurants'
       click_link 'Edit KFC'
+      p current_user
       fill_in 'Name', with: 'Kentucky Fried Chicken'
       click_button 'Update Restaurant'
       expect(page).to have_content 'Kentucky Fried Chicken'
