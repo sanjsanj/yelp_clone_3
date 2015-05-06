@@ -31,7 +31,11 @@ Devise.setup do |config|
   # or not authentication should be aborted when the value is not present.
   # config.authentication_keys = [ :email ]
 
-  config.omniauth :facebook, Rails.application.secrets.fb_APP_ID, Rails.application.secrets.fb_APP_SECRET
+  config.omniauth :facebook,
+                  Rails.application.secrets.fb_APP_ID,
+                  Rails.application.secrets.fb_APP_SECRET,
+                  scope: 'public_profile',
+                  display: 'popup'
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
