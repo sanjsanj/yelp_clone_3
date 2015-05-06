@@ -3,7 +3,11 @@
     %h2= link_to restaurant.name, restaurant_path(restaurant)
     = link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant)
     = link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete
-    = link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant)
+
+    - restaurant.reviews.user_id.each do |user|
+      - if user == current_user.id
+        = link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant)
+
     - if restaurant.reviews.any?
       %ul
         - restaurant.reviews.each do |review|
@@ -13,6 +17,7 @@
             \/5
     - else
       %p No reviews
+
 - else
   %h1 No restaurants yet!
 

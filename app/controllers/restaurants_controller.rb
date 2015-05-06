@@ -9,6 +9,7 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new
   end
   def create
+    # raise params
     @restaurant = Restaurant.create(restaurant_params)
     @restaurant.user_id = current_user.id
     if @restaurant.save

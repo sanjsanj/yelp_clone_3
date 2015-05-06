@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    # raise params
     @restaurant = Restaurant.find(params[:restaurant_id])
     @restaurant.reviews.all.each do |review|
       if review.user_id == current_user.id
