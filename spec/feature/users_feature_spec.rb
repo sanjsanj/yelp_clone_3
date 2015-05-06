@@ -12,7 +12,6 @@ feature 'user not signed in and on the homepage' do
     visit '/'
     expect(page).not_to have_link('Sign out')
   end
-
 end
 
 feature 'user signed in on the homepage' do
@@ -36,5 +35,4 @@ feature 'user signed in on the homepage' do
     expect(page).not_to have_link('Sign in')
     expect(page).not_to have_link('Sign up')
   end
-
 end
