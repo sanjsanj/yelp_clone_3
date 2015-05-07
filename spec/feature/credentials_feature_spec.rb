@@ -5,11 +5,11 @@ require 'helpers/restaurants'
 include UserSpecHelpers
 include RestaurantSpecHelpers
 
-feature 'Users must' do
+feature 'Users have' do
 
-  context 'be logged in' do
+  context 'not logged in' do
 
-    scenario 'to create a restaurant' do
+    scenario 'cannot create a restaurant' do
       visit '/'
       click_link 'Add a restaurant'
       expect(page).not_to have_button('Create Restaurant')
@@ -17,7 +17,7 @@ feature 'Users must' do
 
   end
 
-  context 'have created the restaurant' do
+  context 'created the restaurant' do
 
     before :each do
       sign_up_and_sign_in
