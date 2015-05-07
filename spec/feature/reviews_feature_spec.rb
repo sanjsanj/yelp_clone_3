@@ -22,7 +22,6 @@ feature 'reviewing' do
   scenario 'does not allow user to review a restaurant twice' do
     write_review('KFC')
     visit '/'
-    # click_link 'Review KFC'
     expect(page).not_to have_link 'Review KFC'
   end
 end

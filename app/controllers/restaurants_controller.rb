@@ -9,7 +9,6 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new
   end
   def create
-    # raise params
     @restaurant = Restaurant.create(restaurant_params)
     @restaurant.user_id = current_user.id
     if @restaurant.save
@@ -41,7 +40,7 @@ class RestaurantsController < ApplicationController
   end
   def verify_creator(restaurant)
     unless created_by_current_user(restaurant)
-      flash[:notice] = "NO"
+      flash[:notice] = "You may only edit a restaurant that you added"
       redirect_to '/'
     end
   end

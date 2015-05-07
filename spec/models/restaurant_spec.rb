@@ -18,4 +18,18 @@ describe Restaurant, type: :model do
     expect(restaurant).to have(1).error_on(:name)
   end
 
+  it 'knows if it has previously been reviewed by a certain user' do
+    user = double(:user, id: 1)
+    restaurant = Restaurant.create(name: "Pizza Hut")
+    restaurant.reviews.create(user_id: 1)
+    expect(restaurant.has_been_reviewed_by(user)).to equal(true)
+  end
+
+  it 'knows if it has not previously been reviewed by a certain user' do
+    user = double(:user, id: 2)
+    restaurant = Restaurant.create(name: "Pizza Hut")
+    restaurant.reviews.create(user_id: 1)
+    expect(restaurant.has_been_reviewed_by(user)).to equal(false)
+  end
+
 end
