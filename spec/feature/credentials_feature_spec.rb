@@ -33,7 +33,7 @@ feature 'Users have' do
     end
 
     scenario 'to delete the restaurant' do
-
+      visit '/'
     end
 
   end

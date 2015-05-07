@@ -24,4 +24,10 @@ feature 'reviewing' do
     visit '/'
     expect(page).not_to have_link 'Review KFC'
   end
+
+  scenario 'allows user to delete their review' do
+    write_review('KFC')
+    visit '/'
+    expect(page).to have_link 'Delete review'
+  end
 end
